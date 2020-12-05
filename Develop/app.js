@@ -59,19 +59,14 @@ const moreEmp = [{
     name: "continue"
 }];
 
-
-// async function for all processes
 async function buildPage() {
 
-    // initialize continue variable
     var cont = { "continue": true };
 
-    // initialize incrementing variables
     var i = 0;
     var j = 0;
     var k = 0;
     
-    // initialize response arrays
     var managers = [];
     var engineers = [];
     var interns = [];
@@ -81,7 +76,6 @@ async function buildPage() {
             var role = await inquirer.prompt(employeeType);
             var defaultAs = await inquirer.prompt(defaultQs);
 
-            // get unique data based on type, build array of objects
             if (role.type === "Manager") {
                 var office = await inquirer.prompt(managerQuestions);
                 managers[i] = new Manager(defaultAs.name, defaultAs.id, defaultAs.email, office.office);
@@ -97,14 +91,12 @@ async function buildPage() {
                 interns[k] = new Intern(defaultAs.name, defaultAs.id, defaultAs.email, school.school);
                 k++;
             }
-            // check if user is done entering info
             cont = await inquirer.prompt(moreEmp);
         }
     } catch (err) {
         console.log(err);
     }
 
-    // combine responses into object with format readable by htmlRenderer.js
     const employees = [];
     for (var n = 0; n < managers.length; n++){
         employees.push(managers[n]);
@@ -116,10 +108,8 @@ async function buildPage() {
         employees.push(interns[n]);
     }
     
-    // build html
     const html = render(employees);
 
-    // write html
     fs.writeFile("team.html", html, function (err) {
         if (err) {
             error(err);
