@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 
-// Template directory
 const templatesDir = path.resolve(__dirname, "../templates");
 
 const render = employees => {
