@@ -27,5 +27,3 @@ javascript
 html5
 npm packages:
 
-Fs
-Inquirer
